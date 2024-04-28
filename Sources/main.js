@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { Cube } from './CubeClass.js';
 import { CubeArray } from './ArrayCube.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { handleCubeClick } from './Utils.js';
+
 
 // Create a scene
 const scene = new THREE.Scene();
@@ -23,16 +25,21 @@ for (const cube of cubeArray.cubes)
   scene.add(cube.mesh);
 }
 const firstCube = cubeArray.cubes[0];
-camera.position.set(firstCube.mesh.position.x, firstCube.mesh.position.y, firstCube.mesh.position.z - 5);
+camera.position.set(22, 22, 22);
+camera.lookAt(0, 0, 0);
+
+cubeArray.printPositions()
+// drawLineBetweenFurthestCubes(cubeArray.cubes, scene);
 
 
 // Update the animation loop to rotate the cube
 function animate() {
   requestAnimationFrame(animate);
 
-  // Rotate all cubes
-  cubeArray.rotateAll();
+  // FAKE SOLAR SYSTEM
+  // cubeArray.rotateAll();
   controls.update();
   renderer.render(scene, camera);
 }
+window.addEventListener('click', (event) => handleCubeClick(event, camera, scene), false);
 animate();
