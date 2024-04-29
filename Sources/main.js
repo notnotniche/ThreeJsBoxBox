@@ -9,7 +9,7 @@ import { handleCubeClick } from './Utils.js';
 const scene = new THREE.Scene();
 
 // Create a camera
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 // Create a renderer
 const renderer = new THREE.WebGLRenderer();
@@ -18,26 +18,30 @@ document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
-const cubeArray = new CubeArray(10, 0);
+const cubeArray = new CubeArray(4, 10);
 
 for (const cube of cubeArray.cubes)
 {
   scene.add(cube.mesh);
 }
 const firstCube = cubeArray.cubes[0];
-camera.position.set(22, 22, 22);
-camera.lookAt(0, 0, 0);
+const secondCube = cubeArray.cubes[1];
+const lastcube = cubeArray.getLastCubeIndex();
+camera.position.set(firstCube.mesh.position.x, firstCube.mesh.position.y + 2, firstCube.mesh.position.z);
+
+// Make the camera look at the second cube
+controls.target.set(cubeArray.cubes[lastcube].mesh.position.x, cubeArray.cubes[lastcube].mesh.position.y, cubeArray.cubes[lastcube].mesh.position.z);
+camera.lookAt(cubeArray.cubes[1].getPositionX(), cubeArray.cubes[1].getPositionY(), cubeArray.cubes[1].getPositionZ());
 
 cubeArray.cubes[0].printPosition();
-// drawLineBetweenFurthestCubes(cubeArray.cubes, scene);
 
-
-// Update the animation loop to rotate the cube
 function animate() {
   requestAnimationFrame(animate);
 
-  // FAKE SOLAR SYSTEM
-  // cubeArray.rotateAll();
+  if(cubeArray.animationTrigger == 2)
+  {
+    cubeArray.rotateAll();
+  }
   controls.update();
   renderer.render(scene, camera);
 }
