@@ -8,6 +8,7 @@ export class Cube {
         const material = new THREE.MeshBasicMaterial({color: color});
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(x, y, z);
+        this.mesh.cubeReference = this; 
     }
     rotate(x = 0.01, y = 0.01)
     {
@@ -17,5 +18,16 @@ export class Cube {
     printPosition() {
         console.log(`Cube position: x = ${this.mesh.position.x}, y = ${this.mesh.position.y}, z = ${this.mesh.position.z}`);
     }
-
+    getPositionX()
+    {
+        return this.mesh.position.x;
+    }
+    getPositionY()
+    {
+        return this.mesh.position.y;
+    }
+    getPositionZ()
+    {
+        return this.mesh.position.z;
+    }
 }

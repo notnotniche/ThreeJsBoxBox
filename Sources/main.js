@@ -28,7 +28,7 @@ const firstCube = cubeArray.cubes[0];
 camera.position.set(22, 22, 22);
 camera.lookAt(0, 0, 0);
 
-cubeArray.printPositions()
+cubeArray.cubes[0].printPosition();
 // drawLineBetweenFurthestCubes(cubeArray.cubes, scene);
 
 
@@ -41,5 +41,5 @@ function animate() {
   controls.update();
   renderer.render(scene, camera);
 }
-window.addEventListener('click', (event) => handleCubeClick(event, camera, scene), false);
+window.addEventListener('click', (event) => handleCubeClick(event, camera, scene, cubeArray), false);
 animate();
