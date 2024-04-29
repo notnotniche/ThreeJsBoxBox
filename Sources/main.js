@@ -3,18 +3,21 @@ import { Cube } from './CubeClass.js';
 import { CubeArray } from './ArrayCube.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { handleCubeClick } from './Utils.js';
+import { Player } from './Player.js';
 
 
 // Create a scene
 const scene = new THREE.Scene();
 
-// Create a camera
-const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
-
 // Create a renderer
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+// Create a player
+const player = new Player(camera, renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -24,6 +27,7 @@ for (const cube of cubeArray.cubes)
 {
   scene.add(cube.mesh);
 }
+
 const firstCube = cubeArray.cubes[0];
 const secondCube = cubeArray.cubes[1];
 const lastcube = cubeArray.getLastCubeIndex();
@@ -35,7 +39,15 @@ camera.lookAt(cubeArray.cubes[1].getPositionX(), cubeArray.cubes[1].getPositionY
 
 cubeArray.cubes[0].printPosition();
 
+let lastTime = performance.now();
+
 function animate() {
+  const currentTime = performance.now();
+  const deltaTime = (currentTime - lastTime) / 1000; // Time since last frame in seconds
+
+  player.update(deltaTime); // Update the player's controls
+
+  lastTime = currentTime;
   requestAnimationFrame(animate);
 
   if(cubeArray.animationTrigger == 2)
