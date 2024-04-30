@@ -2,9 +2,9 @@ import * as THREE from 'three';
 
 
 export class Cube {
-    constructor(color = 0xffff00, x = 1 , y = 1 , z = 1)
+    constructor(color = 0xffff00, x = 1 , y = 1 , z = 1, h = 2, w = 2, l = 2)
     {
-        const geometry = new THREE.BoxGeometry(2, 2, 2);
+        const geometry = new THREE.BoxGeometry(h, w, l);
         const material = new THREE.MeshBasicMaterial({color: color});
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(x, y, z);

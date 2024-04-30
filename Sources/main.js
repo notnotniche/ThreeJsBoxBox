@@ -27,7 +27,7 @@ renderer.domElement.addEventListener('click', () => {
 
 
 const cubeArray = new CubeArray(100, 10);
-const player = new Player(cubeArray.cubes[0], camera);
+const player = new Player(cubeArray.cubes[0], camera, scene);
 
 for (const cube of cubeArray.cubes)
 {
@@ -43,7 +43,7 @@ function animate() {
   {
 	  cubeArray.rotateAll();
 	}
-//   player.update(camera);
+	// player.update()
   renderer.render(scene, camera);
 }
 window.addEventListener('click', (event) => handleCubeClick(event, camera, scene, cubeArray), false);
