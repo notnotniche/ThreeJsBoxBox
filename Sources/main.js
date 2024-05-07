@@ -11,6 +11,7 @@ import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockCont
 const scene = new THREE.Scene();
 
 
+
 // Create a renderer
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -26,8 +27,11 @@ renderer.domElement.addEventListener('click', () => {
 // Create a player
 
 
+
 const cubeArray = new CubeArray(100, 10);
 const player = new Player(cubeArray.cubes[0], camera, scene);
+
+
 
 for (const cube of cubeArray.cubes)
 {
