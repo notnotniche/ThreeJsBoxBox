@@ -6,7 +6,7 @@ import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockCont
 export class Player {
 	constructor(cube, camera, scene) {
 		this.controls = new PointerLockControls(camera, document.body);
-		const body = new Cube(0x00ff00, cube.mesh.position.x, cube.mesh.position.y + cube.mesh.geometry.parameters.height / 2 + 1, cube.mesh.position.z, 0.2, 0.2, 0.2);
+		const body = new Cube(0x00ff00, cube.mesh.position.x, cube.mesh.position.y + 2, cube.mesh.position.z, 0.5, 0.5, 0.5);
 
 		scene.add(body.mesh);
 		// Add event listener for click event to lock the pointer
@@ -25,7 +25,7 @@ export class Player {
 		  
 			// Update the camera's projection matrix
 			camera.updateProjectionMatrix();
-		  }, false);
+		  }, false); 
 		// Add event listener for mousemove event
 		document.addEventListener('mousemove', (event) => {
 		  // Normalize the mouse position from -1 to 1
@@ -58,11 +58,7 @@ export class Player {
 			  // Smoothly transition to the target position
 			  camera.position.lerp(targetPosition, 0.05);
 			  body.mesh.position.copy(camera.position);
-			  body.mesh.position.y -= 0.5
-			
-			  
-			  
-			  
+			  body.mesh.position.y -= 0.3; 
 			}
 		  }, false);
 	
@@ -73,9 +69,9 @@ export class Player {
 		}, false);
 	
 		camera.position.x = cube.mesh.position.x;
-		camera.position.y = cube.mesh.position.y + cube.mesh.geometry.parameters.height / 2 + 1;
+		camera.position.y = cube.mesh.position.y;
 		camera.position.z = cube.mesh.position.z;
-		camera.position.y += 2;
+		camera.position.y += 0.3;
 
 		// Update the camera's lookAt to the body's position
 		camera.lookAt(body.mesh.position);

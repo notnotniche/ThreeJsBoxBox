@@ -29,6 +29,7 @@ renderer.domElement.addEventListener('click', () => {
 
 
 const cubeArray = new CubeArray(100, 10);
+camera.position.set(cubeArray.cubes[0].mesh.position.x, cubeArray.cubes[0].mesh.position.y + 2, cubeArray.cubes[0].mesh.position.z);
 const player = new Player(cubeArray.cubes[0], camera, scene);
 
 
